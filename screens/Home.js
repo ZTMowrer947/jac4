@@ -1,8 +1,10 @@
 import { StatusBar } from "expo-status-bar";
-import React from "react";
-import { StyleSheet, View, Button, Text } from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, View, Button, Text, Linking } from "react-native";
 
 export default function HomeScreen({ navigation }) {
+  const [isMusicActive, setMusicActive] = useState(true);
+
   return (
     <View style={styles.container}>
       <View style={styles.mainContent}>
@@ -16,9 +18,24 @@ export default function HomeScreen({ navigation }) {
       </View>
 
       <View style={styles.bottomBtns}>
-        <Button title="Music" />
-        <Button title="Coding Club!" />
-        <Button title="GitHub" />
+        <Button
+          title={`Music: ${isMusicActive ? "On" : "Off"}`}
+          onPress={() => {
+            setMusicActive((prevValue) => !prevValue);
+          }}
+        />
+        <Button
+          title="Coding Club!"
+          onPress={() => {
+            Linking.openURL("https://wvcoding.org");
+          }}
+        />
+        <Button
+          title="GitHub"
+          onPress={() => {
+            Linking.openURL("https://github.com/ZTMowrer947/jac4");
+          }}
+        />
       </View>
       <StatusBar style="auto" />
     </View>
