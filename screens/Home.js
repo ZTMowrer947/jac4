@@ -2,11 +2,11 @@ import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet, View, Button, Text } from "react-native";
 
-export default function HomeScreen() {
+export default function HomeScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.mainContent}>
-        <Text></Text>
+        <Text style={styles.title}>JAC4</Text>
         <Button title="Play" />
       </View>
 
@@ -27,6 +27,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  title: {
+    fontSize: 48,
+  },
   mainContent: {
     flex: 1,
     alignItems: "center",
@@ -34,9 +37,9 @@ const styles = StyleSheet.create({
   },
   bottomBtns: {
     flexDirection: "row",
-    justifyContent: "space-around",
+    justifyContent: "space-between",
     alignItems: "flex-end",
-    width: "100%",
+    width: "80%",
     marginTop: "-10%",
     paddingBottom: "10%",
   },
