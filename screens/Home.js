@@ -7,7 +7,12 @@ export default function HomeScreen({ navigation }) {
     <View style={styles.container}>
       <View style={styles.mainContent}>
         <Text style={styles.title}>JAC4</Text>
-        <Button title="Play" />
+        <Button
+          title="Play"
+          onPress={() => {
+            navigation.navigate("GameSetup");
+          }}
+        />
       </View>
 
       <View style={styles.bottomBtns}>
