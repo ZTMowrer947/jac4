@@ -1,11 +1,12 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, View, Button } from "react-native";
+import { StyleSheet, View, Button, Text } from "react-native";
 
 export default function HomeScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.mainContent}>
+        <Text></Text>
         <Button title="Play" />
       </View>
 
@@ -34,7 +35,9 @@ const styles = StyleSheet.create({
   bottomBtns: {
     flexDirection: "row",
     justifyContent: "space-around",
-    width: "25%",
-    marginBottom: "1rem",
+    alignItems: "flex-end",
+    width: "100%",
+    marginTop: "-10%",
+    paddingBottom: "10%",
   },
 });
