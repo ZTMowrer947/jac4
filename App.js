@@ -4,6 +4,7 @@ import React from "react";
 
 import HomeScreen from "./screens/Home";
 import GameSetupScreen from "./screens/GameSetup";
+import GameScreen from "./screens/Game";
 
 const Stack = createNativeStackNavigator();
 
@@ -19,6 +20,11 @@ export default function App() {
         <Stack.Screen
           name="GameSetup"
           component={GameSetupScreen}
+          options={{ headerShown: false }}
+        ></Stack.Screen>
+        <Stack.Screen
+          name="Game"
+          component={GameScreen}
           options={{ headerShown: false }}
         ></Stack.Screen>
       </Stack.Navigator>

@@ -1,27 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, View, Text, StyleSheet } from "react-native";
 
 export default function GameSetupScreen({ navigation }) {
+  const [gameType, setGameType] = useState("singleplayer");
+
   return (
     <View style={styles.container}>
       <View style={styles.mainContent}>
         <Text>Game Setup</Text>
         <View style={styles.btnGroup}>
-          <Button title="Singleplayer" />
-          <Button title="Multiplayer" />
+          <Button
+            title="Singleplayer"
+            disabled={gameType === "singleplayer"}
+            onPress={() => {
+              setGameType("singleplayer");
+            }}
+          />
+          <Button
+            title="Multiplayer"
+            disabled={gameType === "multiplayer"}
+            onPress={() => {
+              setGameType("multiplayer");
+            }}
+          />
         </View>
       </View>
-      <View style={styles.mainContent}>
-        <View style={styles.btnGroup}>
-          <Button title="Easy" />
-          <Button title="Medium" />
-          <Button title="Hard" />
-          <Button title="Extreme" />
+      {gameType === "singleplayer" && (
+        <View style={styles.mainContent}>
+          <View style={styles.btnGroup}>
+            <Button title="Easy" />
+            <Button title="Medium" />
+            <Button title="Hard" />
+            <Button title="Extreme" />
+          </View>
         </View>
-      </View>
+      )}
       <View style={styles.btnGroup}>
         <Button title="Back" onPress={() => navigation.navigate("Home")} />
-        <Button title="Start!" />
+        <Button title="Start!" onPress={() => navigation.navigate("Game")} />
       </View>
     </View>
   );
