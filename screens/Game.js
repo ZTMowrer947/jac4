@@ -1,10 +1,12 @@
-import React from "react";
-import { Button, View, Text, StyleSheet } from "react-native";
+import React, { useEffect } from "react";
+import { Button, View, Text, StyleSheet, Image } from "react-native";
+
+import BoardSvg from "../images/board/board.svg";
 
 export default function GameScreen({ navigation }) {
   return (
     <View style={styles.container}>
-      <Text>Here be where the game gonna be</Text>
+      <BoardSvg width={400} height={350} style={styles.board} />
     </View>
   );
 }
