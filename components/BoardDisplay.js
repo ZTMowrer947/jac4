@@ -3,7 +3,7 @@ import Svg, { Defs, Rect, G } from "react-native-svg";
 
 import Chip from "./Chip";
 
-export default function BoardDisplay({ chipStates }) {
+export default function BoardDisplay({ chipStates, onChipPress }) {
   return (
     <Svg
       width="169.81171mm"
@@ -31,7 +31,7 @@ export default function BoardDisplay({ chipStates }) {
                 status={status}
                 col={colNum}
                 row={rowNum}
-                onPress={() => {}}
+                onPress={() => onChipPress(rowNum, colNum)}
                 key={`r${rowNum}c${colNum}`}
               />
             ))

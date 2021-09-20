@@ -30,15 +30,30 @@ export function playChipAtCol(col) {
   };
 }
 
+export function resetGame() {
+  return {
+    type: "reset",
+  };
+}
+
 export default function gameReducer(state, action) {
   if (action.type === "playChip") {
-    const row = BOARD_HEIGHT - state.colHeights[action.payload.col] - 1;
+    const { col } = action.payload;
+
+    if (state.colHeights[col] === BOARD_HEIGHT) return state;
+
+    const nextFreeRow = BOARD_HEIGHT - state.colHeights[col] - 1;
+
     const currentPlayer = state.movesPlayed % 2 === 0 ? 1 : 2;
     const newChipState =
       currentPlayer === 1 ? ChipState.player1 : ChipState.player2;
 
     return produce(state, (draft) => {
-      draft.board[action.payload.col][row] = newChipState;
+      draft.board[nextFreeRow][col] = newChipState;
+      draft.colHeights[col]++;
+      draft.movesPlayed++;
     });
+  } else if (action.type === "reset") {
+    return initialBoardState;
   }
 }

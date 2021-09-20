@@ -1,12 +1,24 @@
 import React from "react";
 import { useReducer } from "react";
-import { View, StyleSheet } from "react-native";
+import { Button, View, StyleSheet } from "react-native";
 
 import BoardDisplay from "../components/BoardDisplay";
-import gameReducer, { initialBoardState } from "../state/game";
+import gameReducer, {
+  initialBoardState,
+  playChipAtCol,
+  resetGame,
+} from "../state/game";
 
 export default function GameScreen({ navigation }) {
-  const [state] = useReducer(gameReducer, initialBoardState);
+  const [state, dispatch] = useReducer(gameReducer, initialBoardState);
+
+  const handleChipPress = (row, col) => {
+    dispatch(playChipAtCol(col));
+  };
+
+  const handleReset = () => {
+    dispatch(resetGame());
+  };
 
   return (
     <View style={styles.container}>
@@ -14,7 +26,9 @@ export default function GameScreen({ navigation }) {
         chipStates={state.board}
         colHeights={state.colHeights}
         movesPlayed={state.movesPlayed}
+        onChipPress={handleChipPress}
       />
+      <Button title="Reset" onPress={handleReset} />
     </View>
   );
 }
