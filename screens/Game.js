@@ -1,13 +1,20 @@
-import React, { useEffect } from "react";
-import { Button, View, Text, StyleSheet, Image } from "react-native";
-import Svg, { Defs, Rect, G, Circle } from "react-native-svg";
+import React from "react";
+import { useReducer } from "react";
+import { View, StyleSheet } from "react-native";
 
 import BoardDisplay from "../components/BoardDisplay";
+import gameReducer, { initialBoardState } from "../state/game";
 
 export default function GameScreen({ navigation }) {
+  const [state] = useReducer(gameReducer, initialBoardState);
+
   return (
     <View style={styles.container}>
-      <BoardDisplay />
+      <BoardDisplay
+        chipStates={state.board}
+        colHeights={state.colHeights}
+        movesPlayed={state.movesPlayed}
+      />
     </View>
   );
 }

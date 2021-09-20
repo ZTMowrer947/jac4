@@ -1,28 +1,9 @@
 import React from "react";
-import Svg, { Defs, Rect, G, Circle } from "react-native-svg";
+import Svg, { Defs, Rect, G } from "react-native-svg";
 
-const circleFillRule = "evenodd";
-const strokeWidth = "0.264583";
-const circleRadius = "8.9230661";
-const xCoords = [
-  "41.857616",
-  "63.672501",
-  "85.487381",
-  "107.30227",
-  "129.11716",
-  "150.93202",
-  "172.74692",
-];
-const yCoords = [
-  "30.88728",
-  "52.702164",
-  "74.517044",
-  "96.331924",
-  "118.1468",
-  "139.96169",
-];
+import Chip from "./Chip";
 
-export default function BoardDisplay() {
+export default function BoardDisplay({ chipStates }) {
   return (
     <Svg
       width="169.81171mm"
@@ -44,19 +25,17 @@ export default function BoardDisplay() {
           y="12.699549"
         />
         <G id="g847" transform="translate(0.9408493,-1.6240883)">
-          {yCoords.flatMap((y, rowIndex) => {
-            return Array.from({ length: xCoords.length }, (_, colIndex) => (
-              <Circle
-                fill="#ccc"
-                fillRule={circleFillRule}
-                strokeWidth={strokeWidth}
-                r={circleRadius}
-                cx={xCoords[colIndex]}
-                cy={y}
-                key={`row${rowIndex}-col${colIndex}`}
+          {chipStates.flatMap((chipRow, rowNum) =>
+            chipRow.map((status, colNum) => (
+              <Chip
+                status={status}
+                col={colNum}
+                row={rowNum}
+                onPress={() => {}}
+                key={`r${rowNum}c${colNum}`}
               />
-            ));
-          })}
+            ))
+          )}
         </G>
       </G>
     </Svg>
