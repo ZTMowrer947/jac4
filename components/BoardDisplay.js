@@ -3,6 +3,8 @@ import Svg, { Defs, Rect, G } from "react-native-svg";
 
 import Chip from "./Chip";
 
+// This is pure misery, and nothing more
+
 export default function BoardDisplay({ chipStates, onChipPress }) {
   return (
     <Svg

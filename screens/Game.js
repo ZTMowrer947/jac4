@@ -119,27 +119,62 @@ export default function GameScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <BoardDisplay
-        chipStates={state.board}
-        colHeights={state.colHeights}
-        movesPlayed={state.movesPlayed}
-        onChipPress={handleChipPress}
-      />
-      <Button title="Reset" onPress={handleReset} />
-      {gameState === GameState.Draw && <Text>Draw!</Text>}
-      {[GameState.Player1Win, GameState.Player2Win].includes(gameState) && (
-        <Text>
-          Player {gameState === GameState.Player1Win ? "1" : "2"} Wins!
-        </Text>
-      )}
+      <View style={styles.content}>
+        <BoardDisplay
+          chipStates={state.board}
+          colHeights={state.colHeights}
+          movesPlayed={state.movesPlayed}
+          onChipPress={handleChipPress}
+        />
+        <View style={styles.spacer} />
+        <View style={styles.sadControls}>
+          {gameState === GameState.Ongoing && (
+            <Text>Player {state.movesPlayed % 2 === 0 ? "1" : "2"}'s Turn</Text>
+          )}
+          {gameState === GameState.Draw && <Text>Draw!</Text>}
+          {[GameState.Player1Win, GameState.Player2Win].includes(gameState) && (
+            <Text>
+              Player {gameState === GameState.Player1Win ? "1" : "2"} Wins!
+            </Text>
+          )}
+          {gameState !== GameState.Ongoing && (
+            <View style={styles.btnGroup}>
+              <Button title="Play again" onPress={handleReset} />
+              <Button
+                title="Main Menu"
+                onPress={() => navigation.navigate("Home")}
+              />
+            </View>
+          )}
+          {/* Existence is suffering */}
+        </View>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: "#fff",
+    height: "100%",
+  },
+  content: {
+    alignItems: "center",
+    justifyContent: "space-around",
+    marginTop: "30%",
+    height: "70%",
+  },
+  spacer: {
+    flexGrow: 1,
+    flexShrink: 0,
+  },
+  btnGroup: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "flex-end",
+    width: "80%",
+  },
+  sadControls: {
     alignItems: "center",
     justifyContent: "center",
     width: "100%",
